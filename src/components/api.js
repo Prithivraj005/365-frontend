@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000"; // change later to deployed URL
+const API_BASE_URL = "https://three65-82mp.onrender.com"; // change later to deployed URL
 export default API_BASE_URL;
 
 
@@ -31,3 +31,4 @@ export async function login(username, password) {
 
   return res.json();
 }
+
