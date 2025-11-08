@@ -1,9 +1,9 @@
-const API_BASE_URL = "https://three65-82mp.onrender.com"; // change later to deployed URL
+const API_BASE_URL =process.env.REACT_APP_BACKEND_URL; // change later to deployed URL
 export default API_BASE_URL;
 
 
 export async function signup(username, password) {
-  const res = await fetch(`${https://render.com/docs/node-version}/signup`, {
+  const res = await fetch(`${API_BASE_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
@@ -18,7 +18,7 @@ export async function signup(username, password) {
 }
 
 export async function login(username, password) {
-  const res = await fetch(`${https://render.com/docs/node-version}/login`, {
+  const res = await fetch(`${API_BASE_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password }),
@@ -31,5 +31,4 @@ export async function login(username, password) {
 
   return res.json();
 }
-
 
