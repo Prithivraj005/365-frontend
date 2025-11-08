@@ -4,3 +4,4 @@ api.js
 .DS_Store
 dist/
 components/api.js
+.env
