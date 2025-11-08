@@ -1,0 +1,115 @@
+/* ============================
+   App.css - final styles
+   ============================ */
+
+/* --- Reset / base --- */
+
+* {
+  box-sizing: border-box;
+}
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* --- THEME TOGGLE (fixed top-left) --- */
+.theme-toggle {
+  position: fixed !important;   /* force fixed position */
+  top: 18px !important;
+  left: 18px !important;
+  font-size: 36px !important;   /* bigger icon */
+  cursor: pointer;
+  z-index: 9999;
+  user-select: none;
+  line-height: 1;
+  padding: 6px;
+  background: transparent;
+  border-radius: 8px;
+}
+
+/* optional small hover highlight */
+.theme-toggle:hover {
+  background-color: rgba(0,0,0,0.06);
+}
+
+/* --- PAGE / TOP BAR --- */
+.top-bar {
+  display: flex;
+  justify-content: center;    /* keep profile area centered */
+  align-items: center;
+  flex-direction: column;
+  padding-top: 60px;
+  width: 100%;
+}
+
+/* --- PROFILE AREA (center column) --- */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* --- PROFILE PICTURE: fixed square, clipped --- */
+.profile-pic {
+  width: 80px;            /* final width */
+  height: 80px;           /* final height */
+  max-width: 80px;
+  max-height: 80px;
+  display: block;         /* remove inline layout quirks */
+  border-radius: 12px;    /* small rounded corners (square look) */
+  object-fit: cover;      /* important: crop/fit image */
+  cursor: pointer;
+  border: 2px solid #bdbdbd;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: #f0f0f0;
+}
+
+/* small hover effect */
+.profile-pic:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* username text below the image */
+.profile h3 {
+  margin: 4px 0 0 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* small logout button styling */
+.profile button {
+  margin-top: 6px;
+  padding: 6px 12px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.profile button:hover { background: #005bb5; }
+
+/* --- Inputs & buttons general --- */
+input[type="text"], input[type="password"], input[type="file"] {
+  padding: 8px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* center page content area below header */
+.main-content {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+/* small responsive adjustments */
+@media (max-width: 520px) {
+  .theme-toggle { font-size: 28px; top: 12px; left: 12px; }
+  .profile-pic { width: 64px; height: 64px; max-width: 64px; max-height: 64px; }
+}
