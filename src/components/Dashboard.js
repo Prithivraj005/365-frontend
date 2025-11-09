@@ -30,7 +30,7 @@ function Dashboard() {
   const todayDay = today.getDate();
   const thisYear = today.getFullYear();
 
-  const BASE = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+  const BASE = process.env.REACT_APP_API_BASE_URL || "https://three65-82mp.onrender.com";
   const getToken = () => localStorage.getItem("token");
 
   // Helper: choose first URL for each media type from rawMedia array

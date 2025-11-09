@@ -1,4 +1,4 @@
-const API_BASE_URL =process.env.REACT_APP_BACKEND_URL; // change later to deployed URL
+const API_BASE_URL = "https://three65-82mp.onrender.com"; // change later to deployed URL
 export default API_BASE_URL;
 
 
@@ -31,4 +31,3 @@ export async function login(username, password) {
 
   return res.json();
 }
-
