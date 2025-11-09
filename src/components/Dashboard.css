@@ -502,3 +502,226 @@
   .white-sheet .mood-popup { margin-top: 14px !important; }
   .grid-container .mood-popup { bottom: -64px !important; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   STRONG MOBILE OVERRIDE
+   Paste at very bottom of CSS
+   ========================= */
+
+/* apply only for screens <= 768px */
+@media (max-width: 768px) {
+
+  /* --- force 2 columns for a lot of possible grid classnames --- */
+  .grid-container,
+  .dashboard,
+  .grid,
+  .days-grid,
+  .daysContainer,
+  .days_container,
+  .daysGrid,
+  .calendar-grid,
+  .day-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 22px 18px !important;
+    justify-items: center !important;
+    align-items: center !important;
+    padding: 12px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+  }
+
+  /* --- circular items (many variants) --- */
+  .day-circle,
+  .day,
+  .day-tile,
+  .tile,
+  .grid-item,
+  .dayBox,
+  .day-item,
+  .daycell {
+    width: 100px !important;
+    height: 100px !important;
+    min-width: 92px !important;
+    min-height: 92px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    background: var(--day-bg, #f4f4f4) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12) !important;
+    position: relative !important;
+    z-index: 1 !important;
+    overflow: visible !important;
+    cursor: pointer !important;
+  }
+
+  /* ensure no overlap from children */
+  .day-circle * ,
+  .day * ,
+  .grid-item * {
+    pointer-events: auto !important;
+  }
+
+  /* --- center the small mood/color popup inside the circle --- */
+  .color-popup,
+  .day-color-picker,
+  .mood-popup,
+  .color-picker,
+  .palette-popup {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: flex !important;
+    gap: 8px !important;
+    padding: 6px 8px !important;
+    background: #fff !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18) !important;
+    z-index: 9999 !important;
+    width: auto !important;
+    max-width: 84% !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: visible !important;
+  }
+
+  /* color options inside */
+  .color-option,
+  .color-dot,
+  .mood-choice,
+  .day-color {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 50% !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
+    cursor: pointer !important;
+  }
+
+  /* keep the picker clickable but not overlapping adjacent cells */
+  .day-circle > .color-popup,
+  .day > .color-popup,
+  .day-tile > .color-popup,
+  .tile > .color-popup {
+    pointer-events: auto !important;
+  }
+
+  /* --- MEDIA VIEW (popup + inline variants) --- */
+  /* Modal-style media popup */
+  .media-popup,
+  .media-modal,
+  .viewer-modal,
+  .preview-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(0,0,0,0.7) !important;
+    z-index: 100000 !important;
+    padding: 12px !important;
+  }
+
+  .media-popup-content,
+  .media-modal .content,
+  .preview-modal .content,
+  .viewer-modal .content,
+  .media-view {
+    background: #fff !important;
+    border-radius: 14px !important;
+    padding: 0 !important; /* remove inner padding so media is full width */
+    width: 100% !important;
+    max-width: 940px !important;
+    max-height: 86vh !important;
+    display: flex !important;
+    flex-direction: column !important; /* stack media + text */
+    align-items: center !important;
+    gap: 0 !important;
+    overflow-y: auto !important; /* scrollable popup */
+  }
+
+  /* make media bigger on top */
+  .media-popup-content img,
+  .media-popup-content video,
+  .media-view img,
+  .media-view video,
+  .media-container img,
+  .media-container video,
+  .preview-media,
+  .sheet-left .preview-media,
+  .white-sheet .preview-media {
+    width: 100% !important;
+    max-height: 80vh !important; /* bigger than before */
+    height: auto !important;
+    object-fit: cover !important;
+    border-radius: 0 !important; /* full width */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+    display: block !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* text/caption below media */
+  .media-text,
+  .text-section,
+  .sheet-view-text,
+  .caption-box,
+  .media-caption {
+    width: 100% !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    padding: 12px !important;
+    background: rgba(255,255,255,0.96) !important;
+    border-radius: 0 !important; /* flat under media */
+    margin: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* avoid inner scroll on sheet-left in responsive popups:
+     let the entire popup scroll, not the left block */
+  .sheet-left,
+  .white-sheet .sheet-left,
+  .media-preview,
+  .media-container {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* ensure HTML/body don't cause horizontal scroll */
+  html, body, #root {
+    overflow-x: hidden !important;
+  }
+}
+
+/* smaller phones adjustments */
+@media (max-width: 420px) {
+  .day-circle,
+  .day,
+  .grid-item,
+  .day-tile {
+    width: 92px !important;
+    height: 92px !important;
+    font-size: 13px !important;
+  }
+  .color-option,
+  .color-dot,
+  .mood-choice { width: 20px !important; height: 20px !important; }
+  .media-popup-content,
+  .media-view { padding: 8px !important; }
+}
