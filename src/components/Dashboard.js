@@ -427,75 +427,84 @@ function Dashboard() {
         })}
       </div>
 
-      {/* Popup */}
-      {selectedDay && (
-        <div className="popup-overlay">
-          <div className="white-sheet">
-            <div className="sheet-header">
-              <h3>Day {selectedDay} — {months[monthIndex]} {thisYear}</h3>
-              <div>
-                <span className="autosave-label">{isToday(monthIndex, selectedDay) ? "Auto-saving ON" : "Saved"}</span>
-                <button className="btn secondary" onClick={closePopup}>Close</button>
-              </div>
-            </div>
-
-            <div className="sheet-body">
-              {/* Left: media */}
-              <div className="sheet-left">
-                <div className="media-tabs">
-                  {["image","video","audio"].map(tab => (
-                    <button key={tab} className={`media-tab ${activeMediaTab === tab ? "active" : ""}`} onClick={() => setActiveMediaTab(tab)}>{tab.toUpperCase()}</button>
-                  ))}
-                  {isToday(monthIndex, selectedDay) && (dayImage || dayVideo || dayAudio) && (
-                    <button className="delete-media-btn" onClick={deleteActiveMedia}>✖</button>
-                  )}
-                </div>
-
-                <div className="upload-row">
-                  {isToday(monthIndex, selectedDay) ? (
-                    <>
-                      <label className="upload-label" style={{ marginRight: 8 }}>
-                        <input type="file" accept="image/*" onChange={(e) => uploadFile(e, "image")} />
-                        Image
-                      </label>
-                      <label className="upload-label" style={{ marginRight: 8 }}>
-                        <input type="file" accept="video/*" onChange={(e) => uploadFile(e, "video")} />
-                        Video
-                      </label>
-                      <label className="upload-label">
-                        <input type="file" accept="audio/*" onChange={(e) => uploadFile(e, "audio")} />
-                        Audio
-                      </label>
-                    </>
-                  ) : (<div style={{ height: 8 }} />)}
-                </div>
-
-                <div className="media-preview">
-                  {activeMediaTab === "image" && (dayImage) && <img src={dayImage} alt="uploaded" className="preview-media" />}
-                  {activeMediaTab === "video" && (dayVideo) && (
-                    <video controls className="preview-media"><source src={dayVideo} /></video>
-                  )}
-                  {activeMediaTab === "audio" && (dayAudio) && (
-                    <audio controls style={{ width: "90%" }}><source src={dayAudio} /></audio>
-                  )}
-                  {!(dayImage || dayVideo || dayAudio) && <div className="no-image">No Media</div>}
-                </div>
-              </div>
-
-              {/* Right: text */}
-              <div className="sheet-right">
-                {!isToday(monthIndex, selectedDay) ? (
-                  <div className="sheet-view-text">{text ? <pre>{text}</pre> : <em>No text saved.</em>}</div>
-                ) : (
-                  <textarea className="sheet-textarea" value={text} placeholder="Type your memory..." onChange={(e) => handleTextChange(e.target.value)} />
-                )}
-              </div>
-            </div>
+     {/* Popup */}
+{selectedDay && (
+  <div className="popup-overlay">
+    <div className="white-sheet mobile-popup">
+      {/* Top 20%: Controls */}
+      <div className="mobile-top-controls">
+        <div className="sheet-header-mobile">
+          <div className="day-date">
+            Day {selectedDay} — {months[monthIndex]} {thisYear}
+          </div>
+          <div className="top-actions">
+            <span className="autosave-label">{isToday(monthIndex, selectedDay) ? "Auto-saving ON" : "Saved"}</span>
+            <button className="btn secondary close-btn" onClick={closePopup}>Close</button>
           </div>
         </div>
-      )}
+
+        <div className="media-tabs-mobile">
+          {["image","video","audio"].map(tab => (
+            <button
+              key={tab}
+              className={`media-tab ${activeMediaTab === tab ? "active" : ""}`}
+              onClick={() => setActiveMediaTab(tab)}
+            >
+              {tab.toUpperCase()}
+            </button>
+          ))}
+          {isToday(monthIndex, selectedDay) && (dayImage || dayVideo || dayAudio) && (
+            <button className="delete-media-btn" onClick={deleteActiveMedia}>✖</button>
+          )}
+        </div>
+
+        {isToday(monthIndex, selectedDay) && (
+          <div className="upload-row-mobile">
+            <label className="upload-label">
+              <input type="file" accept="image/*" onChange={(e) => uploadFile(e, "image")} />Image
+            </label>
+            <label className="upload-label">
+              <input type="file" accept="video/*" onChange={(e) => uploadFile(e, "video")} />Video
+            </label>
+            <label className="upload-label">
+              <input type="file" accept="audio/*" onChange={(e) => uploadFile(e, "audio")} />Audio
+            </label>
+          </div>
+        )}
+      </div>
+
+      {/* Middle 40%: Media */}
+      <div className="mobile-media-preview">
+        {activeMediaTab === "image" && dayImage && (
+          <img src={dayImage} alt="uploaded" className="media-fit" />
+        )}
+        {activeMediaTab === "video" && dayVideo && (
+          <video controls className="media-fit"><source src={dayVideo} /></video>
+        )}
+        {activeMediaTab === "audio" && dayAudio && (
+          <audio controls className="audio-fit"><source src={dayAudio} /></audio>
+        )}
+        {!dayImage && !dayVideo && !dayAudio && <div className="no-media">No Media</div>}
+      </div>
+
+      {/* Bottom 40%: Text */}
+      <div className="mobile-text-area">
+        {!isToday(monthIndex, selectedDay) ? (
+          <div className="sheet-view-text">{text ? <pre>{text}</pre> : <em>No text saved.</em>}</div>
+        ) : (
+          <textarea
+            className="sheet-textarea"
+            value={text}
+            placeholder="Type your memory..."
+            onChange={(e) => handleTextChange(e.target.value)}
+          />
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
-
 export default Dashboard;
